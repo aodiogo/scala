@@ -1,0 +1,4 @@
+def timed [T] (f: => T): T = {
+ val startTime = System.currentTimeMillis()
+ try f finally println(s"Function completed in: ${System.currentTimeMillis() - startTime} ms" )
+}
