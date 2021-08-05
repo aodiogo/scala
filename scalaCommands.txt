@@ -1,0 +1,93 @@
+:quit
+:help
+
+"Hello".intersect("World") // Yields "lo"
+
+99.44.toInt //99
+
+a+b // a.(+b)
+
+1.to(10) // or 1 to 10
+
+"Diogo".sorted
+
+import scala.math._ // _ is wildcard
+
+sqrt(2) //1.41...
+pow(2,4) //16
+min(3,Pi) //3
+
+or use
+
+scala.math.sqrt(4) //if you don't want to import
+
+you can ommit the scala:
+
+math.sqrt(4) // 2.0
+
+BigInt.probablePrime(2, scala.util.Random)
+
+val s = "Hello"
+s(4) // o
+
+or s.apply(4) //o
+
+"Bonjour".sorted.apply(3) 
+
+("Bonjour".sorted)(3)
+
+BigInt("1234567890") same as BigInt.apply("1234567890") - creates a bigInt from String
+
+Array(1,2,3,4)
+
+"Bonjour".count(_.isUpper) // 1 ; counts the number of uppercase letters
+
+"Diogo".containsSlice('i'.to('g')) //true
+
+"crazy"*2 //gives crazycrazy
+
+10 max 2 // gives 10
+
+val nbr3: BigInt = 2
+nbr3.pow(1024)
+
+BigInt.probablePrime(100, util.Random).toString(36) //create 36 char random string
+
+
+"Diogo"(0) //gives "D" first char
+
+val name = "Diogo"
+name(name.size - 1) //"o" last char
+
+scala> "Diogo".take(2)
+res2: String = Di
+
+scala> "Diogo".drop(2)
+res3: String = ogo
+
+scala> "Diogo".drop(3)
+res4: String = go
+
+scala> "Diogo".takeRight(3)
+res5: String = ogo
+
+scala> "Diogo".dropRight(3)
+res6: String = Di
+
+scala> "Diogo".drop(2)
+res7: String = ogo
+
+scala> "Diogo".take(2)
+res8: String = Di
+
+scala> "Diogo".take(1000)
+res9: String = Diogo
+
+scala> "Diogo".drop(2)
+res10: String = ogo
+
+scala> "Diogo".drop(1000)
+res11: String = ""
+
+
+
