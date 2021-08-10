@@ -761,4 +761,104 @@ val str = MessageFormat.format("The answer to {0} is {1}",
 
 Procedures
 
+It does not return anything.
+
+def box(s: String) {
+	val border = "-"*(s.length + 2)
+	printf(f"$border%n|$s|%n$border%n")
+}
+
+or
+
+def box(s: String): Unit = {
+...
+}
+
+
+Lazy Values
+
+When a val is declared as lazy, its initialization is deferred until it is accessed for the first time. For example,
+
+lazy val words = scala.io.Source.fromFile("/usr/share/dict/words").mkString
+
+it will only access the file when the value is read. So, if you misspel the filename, it will be not be caught in compile time.
+
+val words = scala.io.Source.fromFile("/usr/share/dict/words").mkString
+
+  // Evaluated as soon as words is defined
+
+lazy val words = scala.io.Source.fromFile("/usr/share/dict/words").mkString
+
+  // Evaluated the first time words is used
+
+def words = scala.io.Source.fromFile("/usr/share/dict/words").mkString
+
+  // Evaluated every time words is used
+
+
+Exceptions
+
+As in Java, the objects that you throw need to belong to a subclass of java.lang.Throwable
+
+In Scala, there is no checked exceptions (you never have to declare that a function or method throws an exception).
+
+A throw expression has the special type Nothing. That is useful in if/else expressions. If one branch has type Nothing, the type of the if/else expression is the type of the other branch. For example, consider
+
+Click here to view code image
+
+if (x >= 0) { sqrt(x)
+
+} else throw new IllegalArgumentException("x should not be negative")
+
+The first branch has type Double, the second has type Nothing. Therefore, the if/else expression also has type Double.
+
+The syntax for catching exceptions is modeled after the pattern matching syntax (see Chapter 14).
+
+val url = new URL("http://horstmann.com/fred-tiny.gif")
+
+try {
+
+  process(url)
+
+} catch {
+
+  case _: MalformedURLException => println(s"Bad URL: $url")
+
+  case ex: IOException => ex.printStackTrace()
+
+}
+
+val in = new URL("http://horstmann.com/fred.gif").openStream()
+
+try {
+
+  process(in)
+
+} finally {
+
+  in.close()
+
+}
+
+Scala does not have an analog to the Java try-with-resources statement. Consider using the scala-ARM library (http://jsuereth.com/scala-arm). Then you can write
+
+Click here to view code image
+
+import resource._
+
+import java.nio.file._
+
+for (in <- resource(Files.newBufferedReader(inPath));
+
+    out <- resource(Files.newBufferedWriter(outPath))) {
+
+  ...
+
+}
+
+
+If an exception occurs in either of the calls to toInt, or because of division by zero, then result is a Failure object, containing the exception that caused the computation to fail. Otherwise, result is a Success object holding the result of the computation.
+
+
+
 
