@@ -1,4 +1,3 @@
-import java.time.Year
 
 object OOBasics extends App {
   val person = new Person
@@ -10,8 +9,12 @@ object OOBasics extends App {
   val novel = new Novel("O Tempo e o vento", 1953, writer)
   println(novel.toString)
 
+  println(novel.copy(1998))
+
   val counter = new Counter(1)
   println((counter.increment(1000)).toString)
+
+  println(novel.isWrittenBy(writer))
 
 }
 
@@ -25,14 +28,14 @@ class Writer(firstname:String, surname:String, val year:Int) {
 
 class Novel(name:String, year:Int, author:Writer) {
   def authorAge():Int = {
-    return Year.now.getValue - author.year
+    return year - author.year
   }
 
-  def isWrittenBy():String = author.fullname
+  def isWrittenBy(author:Writer):Boolean = author == this.author
 
   def copy(newYear:Int):Novel = new Novel(name, newYear, author)
 
-  override def toString():String = s"Novel: $name + $year + ${author.fullname}"
+  override def toString():String = s"Novel: $name + $year + ${author.fullname}" 
 }
 
 class Counter(init:Int) {
