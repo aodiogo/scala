@@ -23,10 +23,10 @@ class Cons(h:Int, t:MyList) extends MyList {
   def tail:MyList = t
   def isEmpty:Boolean = false
   def add(item:Int):MyList = new Cons(item, this)
-  def printElements:String = head + " " + t.printElements
+  def printElements:String = head + (if(t!=Empty) {" "} else {""}) + t.printElements
 }
 
 object ListTest extends App {
-  val list = new Cons(1, new Cons(2, Empty))
-  println(s"$list")
+  val list = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
+  println(list)
 }
