@@ -16,9 +16,39 @@ object OOBasics extends App {
 
   println(novel.isWrittenBy(writer))
 
+  val mary = new Person("Mary")
+
+  println(mary + new Person("John"))
+
+  println(mary(10))
+
+  println(+mary)
+
+  println(mary learnsScala)
+
 }
 
-class Person
+class Person(name:String, age:Int) {
+  def this() {
+    this("noname", 0)
+  }
+
+  def this(name:String) {
+    this(name, 0)
+  }
+
+  def +(other:Person):String = this.toString + " " + other.toString
+
+  def unary_+ :Person = new Person(name, age+1)
+
+  def +(nickname:String):Person = new Person(s"$name $nickname", 1)
+
+  def learnsScala:String = s"$name learns Scala"
+
+  def apply(times:Int):String = s"$name watched Inception $times times"
+  
+  override def toString():String = s"$name $age"
+}
 
 class Writer(firstname:String, surname:String, val year:Int) {
   def fullname():String = firstname + " " + surname
