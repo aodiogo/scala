@@ -12,7 +12,7 @@ object OOBasics extends App {
   println(novel.copy(1998))
 
   val counter = new Counter(1)
-  println((counter.increment(1000)).toString)
+  println(counter.increment(1000).toString)
 
   println(novel.isWrittenBy(writer))
 
