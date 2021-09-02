@@ -5,6 +5,8 @@ abstract class MyList {
   def tail:MyList
   def isEmpty:Boolean 
   def add(item:Int):MyList
+  def printElements:String
+  override def toString:String = s"[${printElements}]"
 
 }
 
@@ -13,6 +15,7 @@ object Empty extends MyList {
   def tail:MyList = throw new NoSuchElementException
   def isEmpty:Boolean = true
   def add(item:Int):MyList = new Cons(item, Empty)
+  def printElements:String = ""
 }
 
 class Cons(h:Int, t:MyList) extends MyList {
@@ -20,9 +23,10 @@ class Cons(h:Int, t:MyList) extends MyList {
   def tail:MyList = t
   def isEmpty:Boolean = false
   def add(item:Int):MyList = new Cons(item, this)
+  def printElements:String = head + " " + t.printElements
 }
 
 object ListTest extends App {
-  val list = new Cons(1, Empty)
-  println(list.head)
+  val list = new Cons(1, new Cons(2, Empty))
+  println(s"$list")
 }
