@@ -1,20 +1,20 @@
 
 
-abstract class MyList {
-  def head:Int
-  def tail:MyList
+abstract class MyList[A] {
+  def head:A
+  def tail:MyList[A]
   def isEmpty:Boolean 
-  def add(item:Int):MyList
+  def add(item:A):MyList[A]
   def printElements:String
   override def toString:String = s"[${printElements}]"
 
 }
 
 object Empty extends MyList {
-  def head:Int = throw new NoSuchElementException
-  def tail:MyList = throw new NoSuchElementException
+  def head:A = throw new NoSuchElementException
+  def tail:MyList[A] = throw new NoSuchElementException
   def isEmpty:Boolean = true
-  def add(item:Int):MyList = new Cons(item, Empty)
+  def add(item:Int):MyList[A] = new Cons(item, Empty)
   def printElements:String = ""
 }
 
