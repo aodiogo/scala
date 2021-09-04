@@ -1,5 +1,5 @@
 object SearchRange extends App {
-  val array = Array(1,3,3,5,6,8,9,9,15)
+  val array = Array(1,3,3,3,3,3,3,3,3,3,3,5,6,8,9,9,15)
   val item = 9
 
   println(s"Item: $item; Array: ${array.mkString(",")} \nRange: ${searchRange(array, 9).mkString(",")}")
