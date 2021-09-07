@@ -5,33 +5,37 @@ object Permutations extends App {
   // find all permutations in array
   // given [1,2,3] -> 1,2,3 ; 1,3,2 ; 2,3,1 ; 2,1,3 ; 3,1,2 ; 3,2,1
   
-  def permuteHelper(nums:Array[Int], start:Int=0):ArrayBuffer[Array[Int]] = {
-    if(start == nums.length - 1) {
-      return ArrayBuffer(nums)
-    }
-
-    val result = new ArrayBuffer[Array[Int]]()
-    
-    println(s"Start:$start")
-
-    for (i <- start to nums.length - 1) {
-      var temp = nums(start)
-      nums(start) = nums(i)
-      nums(i) = temp
-      for(resultArr <- permuteHelper(nums, start + 1)) result += resultArr
-      temp = nums(start)
-      nums(start) = nums(i)
-      nums(i) = temp
-    }
-    return result
+  def printArr(nums:Array[Int], n:Int):Unit = {
+    for(i <- 0 to n-1) print(nums(i)+" ")
+    println("")
   }
 
 
-  def permute(nums:Array[Int]):ArrayBuffer[Array[Int]] = {
-    return permuteHelper(nums)
+  def permuteHelper(a:Array[Int], size:Int=0, n:Int):Unit = {
+    if(size == 1) {
+      printArr(a,n)
+    }
+
+    for(i <- 0 to size-1) {
+      permuteHelper(a, size - 1, n)
+      if(size % 2 == 1) {
+        var temp:Int = a(0)
+        a(0) = a(size - 1)
+        a(size - 1) = temp
+      } else {
+        var temp = a(i)
+        a(i) = a(size - 1)
+        a(size - 1) = temp
+      }
+    }
   }
 
-  permute(Array(1,2,3)).foreach(arr => println(arr.mkString(",")))
+
+  def permute(nums:Array[Int]):Unit = {
+    return permuteHelper(nums, nums.length, nums.length)
+  }
+
+  permute(Array(1,2,3))
 
 
 }
