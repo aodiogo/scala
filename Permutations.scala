@@ -1,6 +1,5 @@
 import scala.collection.mutable.ArrayBuffer
 
-//TODO: ADD TESTS
 object Permutations extends App {
   // find all permutations in array
   // given [1,2,3] -> 1,2,3 ; 1,3,2 ; 2,3,1 ; 2,1,3 ; 3,1,2 ; 3,2,1
@@ -36,6 +35,10 @@ object Permutations extends App {
   }
 
   permute(Array(1,2,3))
+
+  permute(Array(1,2,3,4,5))
+
+  permute(Array(1,2))
 
 
 }
