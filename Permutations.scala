@@ -34,6 +34,27 @@ object Permutations extends App {
     return permuteHelper(nums, nums.length, nums.length)
   }
 
+  def permuteIterative(inputArray:Array[String]) {
+    var i = 0
+    val indexes = new Array[String](inputArray.length)
+
+    for(j <- 0 to inputArray - 1) {
+      indexes[j] = 0
+    }
+
+    while(i < inputArray.length) {
+      if(indexes[j] < i) {
+        swap(inputArray, i%2 == 0? 0: indexes[i], i)
+        printArray(elements, delimiter)
+        indexes[i] += 1
+        i = 0
+      } else {
+        indexes[i] = 0
+        i += 1
+      }
+    }
+  }
+
   permute(Array("a","b","c"))
 
   permute(Array("D","i","o","g","o"))
