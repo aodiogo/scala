@@ -11,5 +11,7 @@ object Hanoi extends App {
 
   hanoiFunction(3, 1, 2, 1)
 
+  hanoiFunction(4,2,1,3)
+
   //TODO: TO be completed
 }
