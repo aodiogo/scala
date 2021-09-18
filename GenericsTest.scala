@@ -4,6 +4,8 @@ object GenericsTest extedns App {
 
   class MyMap[key, value]
 
+  trait MyHeap[B] //traits can also be parameterized
+
   def empty[A]: MyList[A] = {
     new MyList[A]()
   }
