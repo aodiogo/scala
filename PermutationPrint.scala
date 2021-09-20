@@ -2,12 +2,12 @@ object PermutationPrint extends App {
   
 //TODO: TO BE FIXED ! INCORRECT!
 
-  def printAllRecursive(n:Int, elements:Array[Int], delimiter:String):Unit = {
+  def printAllRecursive(n:Int, elements:Array[Int]):Unit = {
     if(n == 1) {
-      printArray(elements, delimiter)
+      printArray(elements)
     } else {
       for(i <- 0 to elements.length - 1) {
-        printAllRecursive(n - 1, elements, delimiter)
+        printAllRecursive(n - 1, elements)
 
         if(n % 2 == 0) {
           swap(elements, i, n-1)
@@ -19,8 +19,8 @@ object PermutationPrint extends App {
     }
   }
 
-  def printArray(elements:Array[Int], delimiter:String):Unit = {
-    print(elements.mkString(delimiter)+"\n")
+  def printArray(elements:Array[Int]):Unit = {
+    print(elements.mkString(",")+"\n")
   }
 
   def swap(elements:Array[Int], i:Int, n:Int):Unit = {
@@ -29,5 +29,5 @@ object PermutationPrint extends App {
     elements(n) = temp
   }
 
-  printAllRecursive(3, Array(1,2,3), ",")
+  printAllRecursive(3, Array(1,2,3))
 }
