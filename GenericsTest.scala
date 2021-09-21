@@ -6,6 +6,8 @@ object GenericsTest extedns App {
 
   trait MyHeap[B] //traits can also be parameterized
 
+  trait MyMapTrait[K,V]
+
   def empty[A]: MyList[A] = {
     new MyList[A]()
   }
