@@ -16,6 +16,6 @@ object GenericsTest extedns App {
     new MyMap[k,v]()
   }
 
-
+  //add tests
 
 }
