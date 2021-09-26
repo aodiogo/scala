@@ -10,4 +10,6 @@ object GenericsExamples extends App {
 	val animalList:CovariantList[Animal] = new CovariantList[Cat]
 
 	val dogList:CovariantList[Animal] = new CovariantList[Dog]	
+	
+	val catList:CovariantList[Animal] = new CovariantList[Cat]
 }
