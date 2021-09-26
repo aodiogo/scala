@@ -30,5 +30,5 @@ object GenericsExamples extends App {
 	
 	class ContraVariantList[-A]
 
-	val contravariantList:ContravariantList[Dog] = new ContravariantList[Animal] //only subtypes
+	val contravariantList:ContraVariantList[Dog] = new ContraVariantList[Animal] //only subtypes
 }
