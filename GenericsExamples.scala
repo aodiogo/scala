@@ -22,5 +22,13 @@ object GenericsExamples extends App {
 	
 	println(dogGenericsList.getClass)
 
-	println(dogGenericsList.isInstanceOf[CovariantList[Animal]]) 
+	println(dogGenericsList.isInstanceOf[CovariantList[Animal]])
+
+	class InvariantList[A]
+
+	val invariantList:InvariantList[Animal] = new InvariantList[Animal]
+	
+	class ContraVariantList[-A]
+
+	val contravariantList:ContravariantList[Dog] = new ContravariantList[Animal] //only subtypes
 }
