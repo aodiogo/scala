@@ -22,6 +22,8 @@ class StringToIntTransformer extends MyTransformer[String, Int] {
   override def transform(arg:String):Int = { return arg.toInt }
 }
 
+//TODO: add filter
+
 object Empty extends MyList {
   def head:A = throw new NoSuchElementException
   def tail:MyList[A] = throw new NoSuchElementException
