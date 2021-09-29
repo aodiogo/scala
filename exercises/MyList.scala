@@ -6,6 +6,7 @@ abstract class MyList[A] {
   def isEmpty:Boolean 
   def add(item:A):MyList[A]
   def printElements:String
+  def filter(list:MyList[A]):Boolean //TODO: unfinished
   override def toString:String = s"[${printElements}]" 
 }
 
