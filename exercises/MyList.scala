@@ -1,17 +1,20 @@
 
 
-abstract class MyList[A] {
+abstract class MyList[+A] {
   def head:A
   def tail:MyList[A]
   def isEmpty:Boolean 
-  def add(item:A):MyList[A]
+  def add[B>:A](element: B):MyList[B]
   def printElements:String
-  def filter(list:MyList[A]):Boolean //TODO: unfinished
+  def map[B](transformer:MyTransformer[A,B]):MyList[B]
+  def flatMap[B](transformer: MyTransformer[A, MyList[B]]): MyList[B]
+  def filter(predicate:MyPredicate[A]):MyList[A]
+  def ++[B >: A](list: MyList[B]):MyList[B] //b supertype of a
   override def toString:String = s"[${printElements}]" 
 }
 
 class EvenPredicate extends MyPredicate[Int] {
-  override def test(arg:Int):Boolean = { return n % 2 == 0 }
+  override def test(n:Int):Boolean = { return n % 2 == 0 }
 }
 trait MyPredicate[-T] {
   def test(arg:T):Boolean
@@ -23,25 +26,59 @@ class StringToIntTransformer extends MyTransformer[String, Int] {
   override def transform(arg:String):Int = { return arg.toInt }
 }
 
-//TODO: add filter
-
-object Empty extends MyList {
-  def head:A = throw new NoSuchElementException
-  def tail:MyList[A] = throw new NoSuchElementException
+object Empty extends MyList[Nothing] {
+  def head:Nothing = throw new NoSuchElementException
+  def tail:MyList[Nothing] = throw new NoSuchElementException
   def isEmpty:Boolean = true
-  def add(item:Int):MyList[A] = new Cons(item, Empty)
+  def add[B >: Nothing](element:B):MyList[B] = new Cons(element, Empty)
   def printElements:String = ""
+  def map[B](transformer:MyTransformer[Nothing,B]):MyList[B] = Empty
+  def flatMap[B](transformer: MyTransformer[Nothing, MyList[B]]): MyList[B] = Empty
+  def filter(predicate:MyPredicate[Nothing]):MyList[Nothing] = Empty
+  def ++[B >: Nothing](list: MyList[B]):MyList[B] = 
+    list
 }
 
-class Cons(h:Int, t:MyList) extends MyList {
-  def head:Int = h
-  def tail:MyList = t
+class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
+  def head:A = h
+  def tail:MyList[A] = t
   def isEmpty:Boolean = false
-  def add(item:Int):MyList = new Cons(item, this)
-  def printElements:String = head + (if(t!=Empty) {" "} else {""}) + t.printElements
+  def add[B>:A](item:B):MyList[B] = new Cons(item, this)
+  def printElements:String = 
+    if(tail.isEmpty) "" + head
+    else head + " " + tail.printElements
+
+  def filter(predicate: MyPredicate[A]): MyList[A] = 
+    if(predicate.test(h)) new Cons(h, t.filter(predicate))
+    else t.filter(predicate)
+
+  def map[B](transformer:MyTransformer[A,B]):MyList[B] = 
+    new Cons(transformer.transform(h), t.map(transformer))
+
+  def flatMap[B](transformer: MyTransformer[A, MyList[B]]):MyList[B] = 
+    transformer.transform(head) ++ tail.flatMap(transformer)
+
+  def ++[B >: A](list: MyList[B]):MyList[B] = new Cons(head, tail ++ list)
 }
 
 object ListTest extends App {
   val list = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
+  val list2 = new Cons(5, new Cons(6, Empty))
+  val listStr = new Cons("Hi", new Cons("Scala", Empty))
   println(list)
+  println(listStr)
+
+  println(list.map(new MyTransformer[Int, Int] {
+  	override def transform(elem: Int):Int = elem * 2
+  }).toString)
+
+  println(list.filter(new MyPredicate[Int] {
+    override def test(elem : Int):Boolean = elem % 2 == 0
+  }).toString)
+
+  println((list ++ list2).toString)
+
+  println(list.flatMap(new MyTransformer[Int, MyList[Int]] {
+    override def transform(elem:Int): MyList[Int] = new Cons(elem, new Cons(elem + 1, Empty))
+  })).toString
 }
