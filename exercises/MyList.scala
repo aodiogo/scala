@@ -26,7 +26,7 @@ class StringToIntTransformer extends MyTransformer[String, Int] {
   override def transform(arg:String):Int = { return arg.toInt }
 }
 
-object Empty extends MyList[Nothing] {
+case object Empty extends MyList[Nothing] {
   def head:Nothing = throw new NoSuchElementException
   def tail:MyList[Nothing] = throw new NoSuchElementException
   def isEmpty:Boolean = true
@@ -39,7 +39,7 @@ object Empty extends MyList[Nothing] {
     list
 }
 
-class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
+case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   def head:A = h
   def tail:MyList[A] = t
   def isEmpty:Boolean = false
@@ -64,6 +64,12 @@ class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
 object ListTest extends App {
   val list = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
   val list2 = new Cons(5, new Cons(6, Empty))
+  val list3 = list2.copy()
+
+  println(list2 == list3) //true
+
+  println(list2.toString)
+
   val listStr = new Cons("Hi", new Cons("Scala", Empty))
   println(list)
   println(listStr)
