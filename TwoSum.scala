@@ -1,4 +1,4 @@
-object Done extends Exception {}
+case object Done extends Exception {}
 
 object TwoSum extends App {
   val input = Array(7,5,11,9)
