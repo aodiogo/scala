@@ -1,4 +1,4 @@
-class Node(val value: Double, var left: Node, var right: Node) {
+case class Node(val value: Double, var left: Node, var right: Node) {
   def this(value:Double, left:Double, right:Double) {
     this(value, null, null)
     this.left = new Node(left, null, null)
