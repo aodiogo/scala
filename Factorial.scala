@@ -1,4 +1,4 @@
-object Factorial {
+case object Factorial {
   def main(args: Array[String]) {
     def factorial(n: Int): BigInt = {
       if(n < 2) 1
