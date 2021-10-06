@@ -15,16 +15,17 @@ object Calculator extends App {
 
   case object PocketCalculator {
     def add(x:Int, y:Int):Int = {
-      if(x > Int.MaxValue || y > Int.MaxValue || x+y > Int.MaxValue) throw new OverflowException
+      if(x > 0 && y > 0 && x+y < 0) throw new OverflowException
+      else if(x < 0 && y < 0 && x+y > 0) throw new UnderflowException
       else 
         return x+y
     }
 
     def subtract(x:Int, y:Int):Int = {
       val res = x - y
-      if(res < Int.MinValue) throw new UnderflowException
-      else
-        return res
+      if(x>0 && y<0 && res < 0 ) throw new OverflowException
+      else if(x<0 && y>0 && res>0) throw new UnderflowException 
+      else  return res
     }
 
     def multiply(x:Int, y:Int):Int = {
