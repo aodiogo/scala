@@ -1,4 +1,4 @@
-object Hanoi extends App {
+case object Hanoi extends App {
   def hanoiFunction(disk:Int, source:Int, dest:Int, aux:Int):Unit {
     if(disk == 1) {
       dest = disk
