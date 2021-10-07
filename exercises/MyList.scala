@@ -16,12 +16,15 @@ abstract class MyList[+A] {
 class EvenPredicate extends MyPredicate[Int] {
   override def test(n:Int):Boolean = { return n % 2 == 0 }
 }
+/*
 trait MyPredicate[-T] {
   def test(arg:T):Boolean
 }       
 trait MyTransformer[-A, B] {
   def transform(arg:A):B
-}              
+} 
+*/
+
 class StringToIntTransformer extends MyTransformer[String, Int] {
   override def transform(arg:String):Int = { return arg.toInt }
 }
