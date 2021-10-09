@@ -40,7 +40,7 @@ object Calculator extends App {
 
   }
 
-  class OverflowException extends Exception
+  case class OverflowException extends Exception
   class UnderflowException extends Exception
   class MathCalculationException extends Exception
 }
