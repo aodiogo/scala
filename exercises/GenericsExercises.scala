@@ -9,7 +9,7 @@ object GenericsExercises extends App {
 		def transform(arg:A):B
 	}
 
-	class EvenPredicate extends MyPredicate[Int] {
+        case class EvenPredicate extends MyPredicate[Int] {
 		override def test(arg:Int):Boolean = { return n % 2 == 0 }
 	}
 
