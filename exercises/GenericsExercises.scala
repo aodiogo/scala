@@ -13,7 +13,7 @@ object GenericsExercises extends App {
 		override def test(arg:Int):Boolean = { return n % 2 == 0 }
 	}
 
-	class StringToIntTransformer extends MyTransformer[String, Int] {
+        case class StringToIntTransformer extends MyTransformer[String, Int] {
 		override def transform(arg:String):Int = { return arg.toInt }
 
 	}
