@@ -3,7 +3,7 @@ object FunctionExercises extends App {
     override def apply(a:String, b:String):String = a+b
   }
 
-  println(customConcat("Diogo ","lindo"))
+  println(customConcat("Hello ","world"))
 
   
 
