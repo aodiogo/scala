@@ -27,7 +27,7 @@ trait MyTransformer[-A, B] {
 
 //TODO: add functional predicates version
 
-class StringToIntTransformer extends MyTransformer[String, Int] {
+case class StringToIntTransformer extends MyTransformer[String, Int] {
   override def transform(arg:String):Int = { return arg.toInt }
 }
 
