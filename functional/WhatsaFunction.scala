@@ -37,4 +37,5 @@ object WhatsaFunction extends App {
     println(customConcat("2","2"))
     println(double2(2))
     println(double2(4))
+    println(double2(6))
 }
