@@ -27,7 +27,7 @@ object WhatsaFunction extends App {
         def apply(a:A, b:MyFunction[A,B]):B
     }
 
-    def myFunction2(f:Int => Int, a:Int):Int = f(a) 
+    def myFunction2[A,B](f:A => B, a:A):B = f(a) 
     def double2(a:Int):Int = myFunction2(defaultDoubler, a)
 
     println(doubler(2))
