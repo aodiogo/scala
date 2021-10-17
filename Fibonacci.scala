@@ -1,4 +1,4 @@
-object Fibonacci extends App {
+cass object Fibonacci extends App {
   def fibonacci(num:Int):Int = {
     if(num < 2) { 1
     } else 
