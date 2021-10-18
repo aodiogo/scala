@@ -53,7 +53,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
     if(tail.isEmpty) "" + head
     else head + " " + tail.printElements
 
-  def filter(predicate: A => Boolean): MyList[A] = 
+  def filter[A](predicate: A => Boolean): MyList[A] = 
     if(predicate(h)) new Cons(h, t.filter(predicate))
     else t.filter(predicate)
 
@@ -92,11 +92,4 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   println(list.flatMap(new Function1[Int, MyList[Int]] {
     override def apply(elem:Int): MyList[Int] = new Cons(elem, new Cons(elem + 1, Empty))
   })).toString
-
-  def boolenize[Z<:Int](trans:Z=>Boolean, x:Z):Boolean = trans(x)
-
-  def myTrans(x:Int) = true
-
-  println(boolenize(myTrans, 10))
-
 }

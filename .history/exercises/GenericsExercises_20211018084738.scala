@@ -22,6 +22,4 @@ object GenericsExercises extends App {
 		
 		println(myComparator(5,3))
 
-		
-
 }

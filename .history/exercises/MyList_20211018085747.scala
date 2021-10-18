@@ -93,10 +93,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
     override def apply(elem:Int): MyList[Int] = new Cons(elem, new Cons(elem + 1, Empty))
   })).toString
 
-  def boolenize[Z<:Int](trans:Z=>Boolean, x:Z):Boolean = trans(x)
-
-  def myTrans(x:Int) = true
-
-  println(boolenize(myTrans, 10))
+  def myFilter[D](predicate: D => Boolean): MyList[D] = 
+    D == 1
 
 }

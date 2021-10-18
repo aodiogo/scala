@@ -10,7 +10,7 @@ object GenericsExercises extends App {
 	}
 
         class EvenPredicate extends MyPredicate[Int] {
-		override def test(arg:Int):Boolean = { return arg % 2 == 0 }
+		override def test(arg:Int):Boolean = { return n % 2 == 0 }
 	}
 
         class StringToIntTransformer extends MyTransformer[String, Int] {
@@ -21,7 +21,5 @@ object GenericsExercises extends App {
 	def myComparator[A<:Int,B<:Int](a:A,b:B):Int = a-b
 		
 		println(myComparator(5,3))
-
-		
 
 }
