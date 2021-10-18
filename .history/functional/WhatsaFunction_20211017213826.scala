@@ -40,10 +40,6 @@ object WhatsaFunction extends App {
         override def apply(a:String, b:String):String = a+b
     }
 
-    def adder2: (Int,Int) => Int = new Function2[Int,Int,Int] {
-        override def apply(a:Int,b:Int):Int = a+b
-    }
-
     println(doubler(2))
     println(defaultDoubler(2))
     println(stringToIntConverter("4"))
@@ -54,5 +50,4 @@ object WhatsaFunction extends App {
     println(double2(6))
     println(myConcatter("hi ", " quebec"))
     println(myConcatenator("hi ", " world"))
-    println(s"$$ ${adder2(2,2)}")
 }

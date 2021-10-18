@@ -30,20 +30,6 @@ object WhatsaFunction extends App {
     def myFunction2[A,B](f:A => B, a:A):B = f(a) 
     def double2(a:Int):Int = myFunction2(defaultDoubler, a)
 
-    // (Int,Int) => Int is a syntatic sugar to Function2[Int,Int,Int]
-    //Function2[A,B,R]  is same as (A,B)=>R
-    //all scala functions are classes implementing Function1, Function2, Function3...
-
-    def myConcatter(a:String, b:String):String = a+b
-
-    def myConcatenator: (String,String) => String = new Function2[String,String,String] {
-        override def apply(a:String, b:String):String = a+b
-    }
-
-    def adder2: (Int,Int) => Int = new Function2[Int,Int,Int] {
-        override def apply(a:Int,b:Int):Int = a+b
-    }
-
     println(doubler(2))
     println(defaultDoubler(2))
     println(stringToIntConverter("4"))
@@ -52,7 +38,4 @@ object WhatsaFunction extends App {
     println(double2(2))
     println(double2(4))
     println(double2(6))
-    println(myConcatter("hi ", " quebec"))
-    println(myConcatenator("hi ", " world"))
-    println(s"$$ ${adder2(2,2)}")
 }

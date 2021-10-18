@@ -1,5 +1,5 @@
-object ListTest extends App {
 
+/*
 abstract class MyList[+A] {
   def head:A
   def tail:MyList[A]
@@ -11,7 +11,7 @@ abstract class MyList[+A] {
   def filter(predicate:A=>Boolean):MyList[A]
   def ++[B >: A](list: MyList[B]):MyList[B] //b supertype of a
   override def toString:String = s"[${printElements}]" 
-}
+}*/
 
 def evenPredicate: Int=>Boolean = new Function1[Int,Boolean] {
   override def apply(n:Int):Boolean = { return n % 2 == 0 }
@@ -66,7 +66,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   def ++[B >: A](list: MyList[B]):MyList[B] = new Cons(head, tail ++ list)
 }
 
-
+object ListTest extends App {
   val list = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
   val list2 = new Cons(5, new Cons(6, Empty))
   val list3 = list2.copy()

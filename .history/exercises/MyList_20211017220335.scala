@@ -1,4 +1,4 @@
-object ListTest extends App {
+
 
 abstract class MyList[+A] {
   def head:A
@@ -6,14 +6,14 @@ abstract class MyList[+A] {
   def isEmpty:Boolean 
   def add[B>:A](element: B):MyList[B]
   def printElements:String
-  def map[B](transformer:A=>B):MyList[B]
-  def flatMap[B](transformer:A=>MyList[B]): MyList[B]
+  def map[B](transformer:MyTransformer[A,B]):MyList[B]
+  def flatMap[B](transformer: MyTransformer[A, MyList[B]]): MyList[B]
   def filter(predicate:A=>Boolean):MyList[A]
   def ++[B >: A](list: MyList[B]):MyList[B] //b supertype of a
   override def toString:String = s"[${printElements}]" 
 }
 
-def evenPredicate: Int=>Boolean = new Function1[Int,Boolean] {
+def evenPredicate = new Function1[Int,Boolean] {
   override def apply(n:Int):Boolean = { return n % 2 == 0 }
 }
 
@@ -27,7 +27,7 @@ trait MyTransformer[-A, B] {
 */
 
 
-def stringToIntTransformer:String=>Int = new Function1[String, Int] {
+def StringToIntTransformer = new Function1[String, Int] {
   override def apply(arg:String):Int = { return arg.toInt }
 }
 
@@ -37,8 +37,8 @@ case object Empty extends MyList[Nothing] {
   def isEmpty:Boolean = true
   def add[B >: Nothing](element:B):MyList[B] = new Cons(element, Empty)
   def printElements:String = ""
-  def map[B](transformer:Nothing=>B):MyList[B] = Empty
-  def flatMap[B](transformer: Nothing=>MyList[B]): MyList[B] = Empty
+  def map: A => B = new Function1[B,MyList[B]] {override def apply() } 
+  def flatMap[B](transformer: MyTransformer[Nothing, MyList[B]]): MyList[B] = Empty
   def filter(predicate:Nothing=>Boolean):MyList[Nothing] = Empty
   def ++[B >: Nothing](list: MyList[B]):MyList[B] = 
     list
@@ -57,7 +57,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
     if(predicate(h)) new Cons(h, t.filter(predicate))
     else t.filter(predicate)
 
-  def map[B](transformer:A=>B):MyList[B] = 
+  def map[B](transformer:A=>B]):MyList[B] = 
     new Cons(transformer(h), t.map(transformer))
 
   def flatMap[B](transformer: A=>MyList[B]):MyList[B] = 
@@ -66,7 +66,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   def ++[B >: A](list: MyList[B]):MyList[B] = new Cons(head, tail ++ list)
 }
 
-
+object ListTest extends App {
   val list = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
   val list2 = new Cons(5, new Cons(6, Empty))
   val list3 = list2.copy()

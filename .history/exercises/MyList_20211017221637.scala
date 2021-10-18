@@ -1,4 +1,4 @@
-object ListTest extends App {
+
 
 abstract class MyList[+A] {
   def head:A
@@ -66,7 +66,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   def ++[B >: A](list: MyList[B]):MyList[B] = new Cons(head, tail ++ list)
 }
 
-
+object ListTest extends App {
   val list = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
   val list2 = new Cons(5, new Cons(6, Empty))
   val list3 = list2.copy()
