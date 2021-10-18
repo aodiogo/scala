@@ -52,16 +52,6 @@ object WhatsaFunction extends App {
 
     val myFunctionNew = myHighOrderFunction(1000)
 
-    val superAdder: Int => Int => Int = new Function1[Int, Function1[Int,Int]] {
-        override def apply(x:Int) = new Function1[Int,Int] {
-            override def apply(y:Int) = x+y
-        }
-    }
-
-    val adderNewCustom = superAdder(10)
-
-    def myHighOrderFunction2(f:Int=>Int, x:Int):Int = 1000 + f(x)
-
     println(doubler(2))
     println(defaultDoubler(2))
     println(stringToIntConverter("4"))
@@ -74,8 +64,4 @@ object WhatsaFunction extends App {
     println(myConcatenator("hi ", " world"))
     println(s"$$ ${adder2(2,2)}")
     println(myFunctionNew(3))
-    println(adderNewCustom(10)) //20
-    println(superAdder(3)(4)) //7 - curried function
-    println(myHighOrderFunction2(adderNewCustom, 3)) //1013
-
 }
