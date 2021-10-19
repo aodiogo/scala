@@ -24,15 +24,11 @@ object AnonymousFunctions extends App {
 
     val niceIncrementer: Int => Int = _ + 1 //equivalent of x => x + 1 , syntatic sugar
 
-    val niceAdder: (Int,Int) => Int = _ + _ //equivalent of (a,b) => x+y
-
-    val mySubtracter: Int => Int = _ - 1
-
+    
     println(doubler(2))
     println(doublerAnonymous(2))
     println(doubleAnonymous2(2))
     println(doublerVariation(2))
     println(noParamsFunction()) //you must call with parenthesis otherwise it prints the reference to the function cause it is an anonymous funciton
-    println(mySubtracter(10))
 
 }
