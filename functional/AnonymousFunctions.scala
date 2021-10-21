@@ -30,6 +30,8 @@ object AnonymousFunctions extends App {
 
    val mySquareRoot: Int => Double = scala.math.pow(_,0.5)
 
+   val myAdder: (Int,Int) => Int = _ + _
+
     println(doubler(2))
     println(doublerAnonymous(2))
     println(doubleAnonymous2(2))
@@ -37,5 +39,6 @@ object AnonymousFunctions extends App {
     println(noParamsFunction()) //you must call with parenthesis otherwise it prints the reference to the function cause it is an anonymous funciton
     println(mySubtracter(10))
     println(mySquareRoot(25))
+    println(myAdder(30,40))
 
 }
