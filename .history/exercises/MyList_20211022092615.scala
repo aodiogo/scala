@@ -13,7 +13,7 @@ abstract class MyList[+A] {
   override def toString:String = s"[${printElements}]" 
 }
 
-def evenPredicate = elem => elem % 2 == 0 
+def evenPredicate: Int=>Boolean = _ % 2 == 0 
 
 /*
 trait MyPredicate[-T] {
@@ -25,7 +25,7 @@ trait MyTransformer[-A, B] {
 */
 
 
-def stringToIntTransformer: elem => elem.toInt 
+def stringToIntTransformer:String=>Int = _.toInt 
 
 case object Empty extends MyList[Nothing] {
   def head:Nothing = throw new NoSuchElementException
@@ -75,14 +75,17 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   println(list)
   println(listStr)
 
-  println(list.map(elem = elem * 2).toString)
+  println(list.map( (Int => Int) = _ * 2
+ ).toString)
 
-  println(list.filter( elem => elem % 2 == 0).toString)
+  println(list.filter( Int => Boolean = {
+    _ % 2 == 0
+  }).toString)
 
   println((list ++ list2).toString)
 
-  println(list.flatMap(elem => {
-    new Cons(elem, new Cons(elem + 1, Empty))
+  println(list.flatMap(Int => MyList[Int] = {
+    new Cons(_, new Cons(_ + 1, Empty))
   })).toString
 
   def boolenize[Z<:Int](trans:Z=>Boolean, x:Z):Boolean = trans(x)
