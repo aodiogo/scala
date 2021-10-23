@@ -24,7 +24,7 @@ object AnonymousFunctions extends App {
 
     val niceIncrementer: Int => Int = _ + 1 //equivalent of x => x + 1 , syntatic sugar
 
-    val niceAdder = (elem1:Int,elem2:Int) => elem1 + elem2 //equivalent of (a,b) => x+y
+    val niceAdder: elem1,elem2 => elem1 + elem2 //equivalent of (a,b) => x+y
 
     val mySubtracter: Int => Int = _ - 1
 
