@@ -6,22 +6,15 @@ object WhatsaFunction extends App {
         def apply(element:A):B
     }
 
-    val defaultDoubler = new Function[Int,Int] {
-        override def apply(a:Int):Int = a*2
-    }
+    val defaultDoubler = (a:Int)  => a*2
 
+    println("DefaultDoubler:"+defaultDoubler(5))
 
-    val stringToIntConverter = new Function1[String, Int] {
-        override def apply(a:String):Int = a.toInt
-    }
+    val stringToIntConverter = (a:String) => a.toInt
 
-    val adder = new Function2[Int,Int,Int] {
-        override def apply(a:Int, b:Int):Int = a+b
-    }
+    val adder = (a:Int, b:Int) => a+b
 
-    val customConcat = new Function2[String,String,String] {
-        override def apply(a:String, b:String):String = a+b
-    }
+    val customConcat = (a:String, b:String) => a+b
 
     trait MyFunction2[A, MyFunction[A,B], B] {
         def apply(a:A, b:MyFunction[A,B]):B
@@ -36,9 +29,7 @@ object WhatsaFunction extends App {
 
     def myConcatter(a:String, b:String):String = a+b
 
-    def myConcatenator: (String,String) => String = new Function2[String,String,String] {
-        override def apply(a:String, b:String):String = a+b
-    }
+    def myConcatenator = (a:String, b:String) => a+b
 
     def adder2: (Int,Int) => Int = new Function2[Int,Int,Int] {
         override def apply(a:Int,b:Int):Int = a+b
@@ -57,6 +48,9 @@ object WhatsaFunction extends App {
             override def apply(y:Int) = x+y
         }
     }
+
+    val superAdd = (x:Int) => (y:Int) => x+y //x returns y function that returns x + y
+    println(superAdd(3)(4)) //7
 
     val adderNewCustom = superAdder(10)
 

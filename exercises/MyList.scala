@@ -75,14 +75,14 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   println(list)
   println(listStr)
 
-  println(list.map(elem = elem * 2).toString)
+  println(list.map(elem = elem * 2).toString) // or _ * 2
 
-  println(list.filter( elem => elem % 2 == 0).toString)
+  println(list.filter( elem => elem % 2 == 0).toString) // or simply _ % 2 == 0
 
   println((list ++ list2).toString)
 
   println(list.flatMap(elem => {
-    new Cons(elem, new Cons(elem + 1, Empty))
+    new Cons(elem, new Cons(elem + 1, Empty)) // can't use the _ notation here cause elem is used twice and the underscore twice is used to represent two different variables
   })).toString
 
   def boolenize[Z<:Int](trans:Z=>Boolean, x:Z):Boolean = trans(x)
