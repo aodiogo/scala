@@ -10,10 +10,13 @@ abstract class MyList[+A] {
   def flatMap[B](transformer:A=>MyList[B]): MyList[B]
   def filter(predicate:A=>Boolean):MyList[A]
   def ++[B >: A](list: MyList[B]):MyList[B] //b supertype of a
+  //hofs
+  def foreach(f:A => Unit):Unit
+  def sort(compare: (A,A) => Int):MyList[A]
   override def toString:String = s"[${printElements}]" 
 }
 
-def evenPredicate = elem => elem % 2 == 0 
+val evenPredicate = (elem:Int) => elem % 2 == 0 
 
 /*
 trait MyPredicate[-T] {
@@ -25,7 +28,7 @@ trait MyTransformer[-A, B] {
 */
 
 
-def stringToIntTransformer: elem => elem.toInt 
+val stringToIntTransformer = (elem:String) => elem.toInt 
 
 case object Empty extends MyList[Nothing] {
   def head:Nothing = throw new NoSuchElementException
@@ -38,6 +41,8 @@ case object Empty extends MyList[Nothing] {
   def filter(predicate:Nothing=>Boolean):MyList[Nothing] = Empty
   def ++[B >: Nothing](list: MyList[B]):MyList[B] = 
     list
+  def foreach(f:Nothing => Unit) = ()
+  def sort(compare: (Nothing, Nothing) => Int) = Empty
 }
 
 case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
@@ -60,6 +65,21 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
     transformer(head) ++ tail.flatMap(transformer)
 
   def ++[B >: A](list: MyList[B]):MyList[B] = new Cons(head, tail ++ list)
+
+  def foreach(f:A => Unit): Unit = {
+    f(h)
+    t.foreach(f)
+  }
+
+  def sort(compare: (A,A) => Int): MyList[A] = {
+    def insert(x:A, sortedList:MyList[A]):MyList[A] = 
+      if(sortedList.isEmpty) new Cons(x,Empty)
+      else if(compare(x, sortedList.head) < 1) new Cons(x, sortedList)
+      else new Cons(sortedList.head, insert(x, sortedList.tail))
+
+    val sortedTail = t.sort(compare)
+    insert(h, sortedTail)
+  }
 }
 
 
@@ -75,7 +95,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   println(list)
   println(listStr)
 
-  println(list.map(elem = elem * 2).toString) // or _ * 2
+  println(list.map(elem => elem * 2).toString) // or _ * 2
 
   println(list.filter( elem => elem % 2 == 0).toString) // or simply _ % 2 == 0
 
@@ -91,4 +111,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
 
   println(boolenize(myTrans, 10))
 
+  list.foreach(print)
+
+  println(list.sort((x,y) => y - x))
 }

@@ -33,4 +33,17 @@ object HOFsCurries extends App {
     val myFunction = nTimesBetter(plusOne, 10)
     println(myFunction(0))
 
+    //curried functions
+    val superAdder: Int => (Int => Int) = (x:Int) => (y:Int) => x + y
+    val add3 = superAdder(3)
+    println(add3(10)) //13
+    println(superAdder(3)(10)) //13
+    
+    //functions with multiple param lists
+    def curriedFormatter(c:String)(x:Double):String = c.format(x)
+    
+    val stdFormat: (Double => String) = curriedFormatter("%4.2f")
+    val preciseFormat: (Double => String) = curriedFormatter("%10.8f")
+    println(stdFormat(Math.PI))
+    println(preciseFormat(Math.PI))
 }
