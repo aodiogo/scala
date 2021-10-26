@@ -72,6 +72,6 @@ object HOFsCurries extends App {
     val composed = compose(add2, times3)
     val ordered = andThen(add2, times3)
 
-    println(composed(4)) //14
-    println(ordered(4)) //18
+    println(composed(4))
+    println(ordered(4))
 }

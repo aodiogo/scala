@@ -14,7 +14,6 @@ abstract class MyList[+A] {
   def foreach(f:A => Unit):Unit
   def sort(compare: (A,A) => Int):MyList[A]
   def zipWith[B,C](list: MyList[B], zip:(A,B) => C):MyList[C]
-  def fold[B](start: B)(operator: (B,A) => B): B
   override def toString:String = s"[${printElements}]" 
 }
 
@@ -48,8 +47,6 @@ case object Empty extends MyList[Nothing] {
   def zipWith[B,C](list: MyList[B], zip:(Nothing,B) => C):MyList[C] = 
     if(!list.isEmpty) throw new RuntimeException("list must be empty and it is not")
     else Empty
-
-  def fold[B](start: B)(operator: (B,Nothing) => B): B = start
 }
 
 case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
@@ -89,22 +86,12 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   }
 
   def zipWith[B,C](list: MyList[B], zip:(A,B) => C):MyList[C] = 
-  { 
-    println(list) 
-    if(list.isEmpty) {
-      println(list)
-      //throw new RuntimeException("list must not be empty")
-      Empty
-    }
+    if(list.isEmpty) throw new RuntimeException("list must not be empty")
     else new Cons(zip(h, list.head), t.zipWith(list.tail, zip))
-  }
-
-  def fold[B](start: B)(operator: (B,A) => B): B = t.fold(operator(start, h))(operator)
-  
 }
 
 
-  val list:MyList[Int] = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
+  val list = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
   val list2 = new Cons(5, new Cons(6, Empty))
   val list3 = list2.copy()
 
@@ -112,7 +99,7 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
 
   println(list2.toString)
 
-  val listStr:MyList[String] = new Cons("Hi", new Cons("Scala", Empty))
+  val listStr = new Cons("Hi", new Cons("Scala", Empty))
   println(list)
   println(listStr)
 
@@ -136,10 +123,5 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
 
   println(list.sort((x,y) => y - x))
 
-  println(listStr.isEmpty)
-
-  println(s"head ${listStr.head} tail ${listStr.tail} ")
-  println(list.zipWith[String,String](listStr, _ + "-" + _))
-
-  println(list.fold(0)(_ + _)) //10 sums all of the elements of array - sort of reduce
+  println(list.zipWith(listStr, _ + "-" + _))
 }

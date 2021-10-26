@@ -141,5 +141,5 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   println(s"head ${listStr.head} tail ${listStr.tail} ")
   println(list.zipWith[String,String](listStr, _ + "-" + _))
 
-  println(list.fold(0)(_ + _)) //10 sums all of the elements of array - sort of reduce
+  println(list.fold(0)(_ + _)) //6
 }

@@ -14,7 +14,6 @@ abstract class MyList[+A] {
   def foreach(f:A => Unit):Unit
   def sort(compare: (A,A) => Int):MyList[A]
   def zipWith[B,C](list: MyList[B], zip:(A,B) => C):MyList[C]
-  def fold[B](start: B)(operator: (B,A) => B): B
   override def toString:String = s"[${printElements}]" 
 }
 
@@ -48,8 +47,6 @@ case object Empty extends MyList[Nothing] {
   def zipWith[B,C](list: MyList[B], zip:(Nothing,B) => C):MyList[C] = 
     if(!list.isEmpty) throw new RuntimeException("list must be empty and it is not")
     else Empty
-
-  def fold[B](start: B)(operator: (B,Nothing) => B): B = start
 }
 
 case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
@@ -89,18 +86,13 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
   }
 
   def zipWith[B,C](list: MyList[B], zip:(A,B) => C):MyList[C] = 
-  { 
-    println(list) 
+  {  
     if(list.isEmpty) {
       println(list)
-      //throw new RuntimeException("list must not be empty")
-      Empty
+      throw new RuntimeException("list must not be empty")
     }
     else new Cons(zip(h, list.head), t.zipWith(list.tail, zip))
   }
-
-  def fold[B](start: B)(operator: (B,A) => B): B = t.fold(operator(start, h))(operator)
-  
 }
 
 
@@ -138,8 +130,5 @@ case class Cons[+A](h:A, t:MyList[A]) extends MyList[A] {
 
   println(listStr.isEmpty)
 
-  println(s"head ${listStr.head} tail ${listStr.tail} ")
   println(list.zipWith[String,String](listStr, _ + "-" + _))
-
-  println(list.fold(0)(_ + _)) //10 sums all of the elements of array - sort of reduce
 }
