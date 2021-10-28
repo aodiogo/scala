@@ -16,11 +16,11 @@ object MapFlatmapFilterFor extends App {
 
     println(list.map(toPair)) //List(List(1, 2), List(2, 3), List(3, 4))
 
-    val nbrs = List(1,2,3)
+    val numbers = List(1,2,3)
     val chars = List('a','b','c', 'd')
     val colors = List("black", "red")
 
-    val combinations = nbrs.flatMap(n => chars.map(c => colors.map(cl => "" + c + n + " " + cl)))
+    val combinations = numbers.flatMap(n => chars.map(c => colors.map(cl => "" + c + n + " " + cl)))
 
     println(combinations)
 
@@ -28,7 +28,7 @@ object MapFlatmapFilterFor extends App {
 
     //for comprehensions
     val forCombinations = for {
-        n <- nbrs if n%2 == 0 //filter
+        n <- numbers if n%2 == 0 //filter
         c <- chars
         cl <- colors
     } yield "" + c + n + " " + cl
@@ -36,7 +36,7 @@ object MapFlatmapFilterFor extends App {
     println(forCombinations)
 
     for {
-        n <- nbrs
+        n <- numbers
     } println(n)
 
     //syntax overload
