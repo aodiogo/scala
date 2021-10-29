@@ -1,6 +1,5 @@
 object PermutationPrint extends App {
   
-//TODO: TO BE FIXED ! INCORRECT!
 
   def printAllRecursive(n:Int, elements:Array[Int]):Unit = {
     if(n == 1) {
@@ -24,9 +23,9 @@ object PermutationPrint extends App {
   }
 
   def swap(elements:Array[Int], i:Int, n:Int):Unit = {
-    val temp = elements(i)
+    val tmp = elements(i)
     elements(i) = elements(n)
-    elements(n) = temp
+    elements(n) = tmp
   }
 
   printAllRecursive(3, Array(1,2,3))
