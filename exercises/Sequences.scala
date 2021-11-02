@@ -79,8 +79,9 @@ object Sequences extends App {
     val numbersVector = (1 to maxCapacity).toVector
 
 
-    println(getWriteTime(numbersList))
-    println(getWriteTime(numbersVector))
+    println("Times with list:"+getWriteTime(numbersList))
+    println("Times with vector:"+getWriteTime(numbersVector))
+    
 
     //Vector is very fast so it is the default implementation of Seq
     //
