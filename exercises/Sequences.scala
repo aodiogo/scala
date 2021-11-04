@@ -29,7 +29,7 @@ object Sequences extends App {
     val prePend2 = 42+:aList:+90 //colon is on the side of the list
     println(prePend2)
 
-    val diogo5 = List.fill(5)("diogo")
+    val diogo5 = List.fill(5)("Diogo")
 
     println(diogo5)
 
