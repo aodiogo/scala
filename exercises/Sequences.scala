@@ -18,7 +18,7 @@ object Sequences extends App {
     val aRange:Seq[Int] = 1 to 1000
     aRange.foreach(println)
 
-    (1 to 100).foreach(x => println("hi"))
+    (1 to 1000).foreach(x => println("hi"))
 
     //Lists : immutable
     //most operations are O(n)
